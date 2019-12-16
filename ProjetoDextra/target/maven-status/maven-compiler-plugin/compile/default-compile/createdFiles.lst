@@ -1,0 +1,5 @@
+Config\CrossOrigin.class
+Controller\Ingredientes.class
+Controller\Lanche.class
+Config\ApplicationConfig.class
+Controller\ServiceLanche.class
