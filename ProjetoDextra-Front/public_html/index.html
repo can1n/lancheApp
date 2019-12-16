@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html ng-app="lancheApp" ng-controller="LanchesController">
+    <head>
+        <title>Lanches</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/styles.css">
+        <link  rel="stylesheet"  href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"  crossorigin="anonymous"
+        <script  src="https://code.jquery.com/jquery-3.3.1.slim.min.js"  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"  crossorigin="anonymous"></script>
+        <script  src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"  integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"  crossorigin="anonymous"></script>
+        <script  src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"  integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"  crossorigin="anonymous"></script>
+        <script src="js/angular.min.js"></script>
+        <script src="js/script.js"></script>
+    </head>
+    <body>
+        <section class="container">
+                <div class="box">
+                <p>Seja Bem Vindo</p>
+                <p>Informe os Valores dos Ingredientes</p>
+                <br>
+                Preco Alface:
+                <input type="number" name="precoAlface"  ng-model="valorAlface">
+                <br>
+                Preco Bacon:
+                <input type="number" name="precoBacon"  ng-model="valorBacon">
+                <br>
+                Preco Hamburguer:
+                <input type="number" name="precoHamburguer"  ng-model="valorHamburguer">
+                <br>
+                Preco Ovo:
+                <input type="number" name="precoOvo"  ng-model="valorOvo">
+                <br>
+                Preco Queijo:
+                <input type="number" name="precoQueijo" ng-model="valorQueijo">
+                <br>
+                <button ng-click="setvalores()"> Salvar </button> 
+                <h3>Selecione o Lanche desejado</h3>
+                <select name="selectlanches" ng-model="selectLanches" ng-options="x.descritivo for x in lanches" ng-disabled="chkCustom">
+                    
+                </select>
+                <br>
+                <input type="checkbox" ng-model="chkCustom" ng-disabled="selectLanches" > Ou Customizar Lanche
+                <a ng-model="escrita"></a>
+            </div>
+            <div class="box">
+                <section>    
+                    <section ng-show="chkCustom">
+                        <div flex="100" flex-gt-sm="50" layout="column">
+                            <div >
+                                <fieldset class="standard">
+                                    <legend>Selecione os Adicionais</legend>
+                                    <div layout="row" layout-wrap flex>
+                                        <div ng-repeat="item in items" class="standard" flex="50">
+                                            <label>
+                                                <input type="checkbox" ng-checked="exists(item, selected)" ng-model="chkBoxes"
+                                                       ng-click="toggle(item, selected) "/>
+                                                {{ item.descritivo }}
+                                            </label>
+                                            <select ng-disabled="!chkBoxes">
+                                                <option ng-repeat="x in qtdeAdicionais" value="{{x}}">{{x}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </section>
+                    <br>
+                    <br>
+                    <h3>
+                        <br>
+                        <h1>Descrição</h1>
+                        <button ng-click="selecionarLanche()"> selecionar </button>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Codigo</th>
+                                    <th>Lanche</th>
+                                    <th>Valor</th>
+                                    <th></th>
+                                </tr>
+                            <thead>
+                            <tbody>
+                                    <td>{{lanche.id}}</td>
+                                    <td>{{lanche.descritivo}}</td>
+                                    <td>{{lanche.total}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </section>
+            </div>
+        </section>
+        <div flex="100">
+            <h2 class="md-title">Selected Items</h2>
+            <code style="display: block; padding: 8px;">{{selected | json}}</code>
+            <code style="display: block; padding:8px;">{{lancheCustom |json}}</code>
+            <code style="display: block; padding:8px;">{{lanche |json}}</code>
+        </div>
+    </body>
+</html>
